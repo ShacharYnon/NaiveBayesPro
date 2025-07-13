@@ -24,9 +24,19 @@ class DataLoader :
         if shuffle:
             self.Data = self.Data.sample(frac=1).reset_index(drop=True)
 
-            train_size = int(len(self.Data)* train_ratio)
-            train_data = self.Data.iloc[:train_size]
-            test_data =self.Data.iloc[train_size:]
+        train_size = int(len(self.Data)* train_ratio)
+        train_data = self.Data.iloc[:train_size]
+        test_data =self.Data.iloc[train_size:]
 
         return train_data ,test_data
+
+    def get_features_and_labels(self):
+        if self.Data is None:
+            raise ValueError("Data not loaded. Please run read_csv() first.")
+
+        features = self.Data.drop(columns=[self.Label_column])
+        labels = self.Data[self.Label_column]
+        return features ,labels
+
+
 
