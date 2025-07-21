@@ -9,13 +9,41 @@ class DataLoader :
         self.Label_column = label_column
         self.Data = None
 
-    def read_csv(self ):
+    # @staticmethod
+    def read_csv(self):
         try:
             self.Data = pd.read_csv(self.Path)
             return self.Data
 
         except Exception as e:
             print(f"ERROR from ReadCSV: {e}")
+
+    # @staticmethod
+    def read_sql(self):
+        try:
+            self.Data = pd.read_sql(self.Path)
+            return self.Data
+
+        except Exception as e:
+            print(f"ERROR from ReadSql: {e}")
+
+    # @staticmethod
+    def read_json(self):
+        try:
+            self.Data = pd.read_json(self.Path)
+            return self.Data
+
+        except Exception as e:
+            print(f"ERROR from ReadJson: {e}")
+
+    # @staticmethod
+    def read_excel(self):
+        try:
+            self.Data = pd.read_excel(self.Path)
+            return self.Data
+
+        except Exception as e:
+            print(f"ERROR from ReadExcel: {e}")
 
     def split_test_train(self ,train_ratio = 0.7 ,shuffle=True):
         if self.Data is None:
@@ -38,5 +66,18 @@ class DataLoader :
         labels = self.Data[self.Label_column]
         return features ,labels
 
+    def drot_column(self ,name_column:str |list[str] | None = None):
+        if name_column is None:
+            print("No column specified to drop.")
+            return
 
+        if isinstance(name_column ,str):
+            name_column = [name_column]
 
+        for column in name_column:
+            if column in self.Data.columns:
+                self.Data = self.Data.drop(columns=column)
+                print(f"Column '{column}' dropped.")
+
+            else:
+                print(f"Column '{column}' not found in features.")
