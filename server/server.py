@@ -1,6 +1,9 @@
 from typing import Union
 from fastapi import FastAPI
 import uvicorn
+
+import main
+
 app = FastAPI()
 
 
@@ -8,7 +11,9 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 
-
+@app.on_event("startup")
+async def get_started():
+    main.main()
 
 
 

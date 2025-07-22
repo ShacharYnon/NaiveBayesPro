@@ -67,6 +67,11 @@ class DataLoader :
         return features ,labels
 
     def drot_column(self ,name_column:str |list[str] | None = None):
+        """
+        Drops one or more specified columns from the dataset if they exist.
+        :param name_column: Name of a column or list of column names to drop. If None, nothing is dropped.
+        :return: None
+        """
         if name_column is None:
             print("No column specified to drop.")
             return

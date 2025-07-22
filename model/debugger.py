@@ -31,9 +31,7 @@ class Debugger:
         if not model.is_fitted:
             raise ValueError("Model must be fitted before evaluation.")
         correct = 0
-        for i in range(len(x)):
-            sample = x.iloc[i].to_dict()
-            true_label = y.iloc[i]
+        for sample, true_label in zip(x.to_dict(orient="records"), y):
             predicted = model.predict(sample)
             if predicted == true_label:
                 correct += 1
