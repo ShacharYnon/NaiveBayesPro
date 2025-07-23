@@ -1,5 +1,5 @@
 from services.data_loader import DataLoader
-from model.classifier2 import Classifier
+from model.classifier import Classifier
 from model.debugger import Debugger
 import os
 
@@ -38,7 +38,7 @@ class Task_manger:
             return
 
         sample = {
-            "age": "<=30",
+            "age": "<= 30",
             "income": "medium",
             "student": "yes",
             "credit_rating": "excellent"
@@ -51,6 +51,7 @@ class Task_manger:
 
         return {
             "Prediction:": pred,
+            "Sample" : sample,
             "Probabilities:": probs
         }
 
