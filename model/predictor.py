@@ -18,4 +18,5 @@ class Predictor:
             if log_prob > best_log_prob:
                 best_log_prob = log_prob
                 best_label = label
+
         return best_label
